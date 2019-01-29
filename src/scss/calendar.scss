@@ -1,0 +1,99 @@
+@import "_settings.scss";
+
+$dayWidth: grid(2);
+$dayHeight: convert(100);
+
+.calendar {
+	position: relative;
+	width: grid(7);
+	min-width: convert(1200);
+	border-top-left-radius: convert(6);
+	border-top-right-radius: convert(6);
+
+	@media screen and ( max-width: convert(1220) ) {
+		min-width: convert(960);
+	}
+
+	@media screen and ( max-width: convert(980) ) {
+		min-width: convert(720);
+	}
+
+	&-header {
+		width: 100%;
+		border-top-left-radius: convert(6);
+		border-top-right-radius: convert(6);
+		box-shadow: inset 0 0 convert(4) rgba(0, 0, 0, 0.55);
+		text-shadow: 0 0 convert(3) rgba(10, 15, 20, 0.55);
+		font-weight: 600;
+		font-family: "Source Sans Pro", sans-serif;
+
+		&__date-wrapper {
+			padding: convert(25) convert(45);
+		}
+
+		&__current-month {
+			font-size: convert(28);
+		}
+
+		&__current-year {
+			font-size: convert(18);
+		}
+	}
+
+	&__columns-name {
+		width: grid(14);
+		@include row(center, center);
+	}
+
+	&__column-name {
+		width: grid(2);
+		padding: convert(10) convert(15);
+		text-align: center;
+	}
+
+	&-days {
+		@include grid;
+		width: 100%;
+		height: 100%;
+		background-color: #fff;
+		overflow: hidden;
+		border: convert(1) solid rgba(0, 0, 0, 0.5);
+		border-bottom-left-radius: convert(6);
+		border-bottom-right-radius: convert(6);
+	}
+
+	&-day {
+		width: $dayWidth;
+		height: $dayHeight;
+		position: relative;
+		background-color: #F6F6F6;
+		border: convert(1) solid rgba(0, 0, 0, 0.15);
+		cursor: pointer;
+		@include column(center, center);
+		text-align: center;
+
+		&__number {
+			font-size: convert(28);
+		}
+
+		&__title-wrapper {
+			padding-top: convert(8);
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: scale(0);
+			transition: transform 0.3s ease-out;
+		}
+
+		&:hover &__title-wrapper {
+			transform: scale(1);
+		}
+	}
+}
+
+.empty-element {
+	width: $dayWidth;
+	height: $dayHeight;
+}

@@ -1,0 +1,52 @@
+/* VARIABLES */
+$gridColumns: 14;
+/* --------- */
+
+/* FUNCTIONS AND MIXINS */
+@function convert($pxsize, $u:rem) {
+  @return $pxsize / 16 + $u;
+}
+
+@function grid($columns) {
+	@if $columns >= $gridColumns {
+		@return 100%;
+	}
+
+	@if $columns <= 0 {
+		@return 0%;
+	}
+
+	$width: 100 / $gridColumns * $columns;
+	@return $width * 1%;
+}
+
+@mixin grid() {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@mixin row(	$justify-content: flex-start, 
+						$align-items: flex-start) {
+	display: flex;
+	
+	@if ($justify-content != flex-start) {
+    justify-content: $justify-content;
+  }
+  @if ($align-items != flex-start) {
+    align-items: $align-items;
+  }
+}
+
+@mixin column(	$align-items: flex-start, 
+						$justify-content: flex-start) {
+	display: flex;
+	flex-direction: column;
+
+	@if ($align-items != flex-start) {
+    align-items: $align-items;
+  }
+	@if ($justify-content != flex-start) {
+    justify-content: $justify-content;
+  }
+}
+/* -------------------- */

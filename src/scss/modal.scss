@@ -1,0 +1,121 @@
+@import "_settings.scss";
+
+.day-modal {
+	width: grid(14);
+	height: 100%;
+	visibility: hidden;
+	@include row(center, center);
+	position: fixed;
+	z-index: 1000;
+	transition: transform 0.4s linear;
+	perspective: convert(1200);
+
+	&__background {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.55);
+		transition: background-color 0.55s;
+		cursor: pointer;
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.60);
+		}
+	}
+
+	&__content-wrapper {
+		width: grid(7);
+		min-width: convert(500);
+		min-height: convert(600);
+		border-radius: convert(8);
+		position: relative;
+		overflow: hidden;
+		@include row;
+		background-color: #fff;
+		z-index: 1001;
+		position: relative;
+		transition: all 0.4s linear;
+		transform: translateY( convert(-150) ) rotateX(-45deg);
+		opacity: 0;
+		box-shadow: convert(1) convert(1) convert(1) rgba(0, 0, 0, 0.25);
+
+		@media screen and ( max-width: convert(1200) ) {
+			min-height: convert(400);
+		}
+	}
+
+	&__save-status {
+		font-size: convert(20);
+		color: #00D500;
+		opacity: 0;
+	}
+
+	&__date-side {
+		width: 50%;
+		font-size: convert(40);
+		font-weight: bold;
+		text-align: center;
+		@include column(center, center);
+	}
+
+	&-inputs {
+		padding: convert(35);
+		width: grid(7);
+		@include column(center, space-between);
+	}
+
+	&__input {
+		font-size: convert(22);
+		border: convert(1) solid rgba(222, 222, 222, 0.9);
+		border-radius: convert(5);
+		padding: convert(10) convert(10) convert(10) convert(15);
+	}
+
+	&__holiday-input {
+		width: convert(15);
+		height: convert(15);
+	}
+
+	&__note-input {
+		font-family: "Open Sans", sans-serif;
+		resize: none;
+		width: 100%;
+		height: 100%;
+		margin-top: convert(20);
+	}
+
+	&_visible &__content-wrapper {
+		transform: translateY(0) rotateX(0);
+		opacity: 1;
+	}
+
+	&_visible {
+		visibility: visible;
+	}
+}
+
+.day_holiday {
+	color: #ff0000;
+}
+
+.inline-inputs {
+	width: 100%;
+	margin-top: convert(10);
+	@include row(space-between, center);
+}
+
+.save-status_hiding {
+	animation: hide 2s cubic-bezier(0, 0, 0.75, 1) forwards;
+}
+
+@keyframes hide {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}

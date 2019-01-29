@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Calendar with notes on every day">
+	<meta name="title" content="Calendar with month planner">
+	<meta name="theme-color" content="">
+	<title>Planner</title>
+<link rel="shortcut icon" href="favicon.png"><link href="css/styles.min.css" rel="stylesheet"></head>
+<body>
+	<div class="page-wrapper">
+		<div class="calendar">
+			<div class="calendar-header">
+				<div class="calendar-header__date-wrapper">
+					<p class="calendar-header__current-month">Month</p>
+					<p class="calendar-header__current-year">Year</p>
+				</div>
+				<div class="calendar__columns-name">
+					<div class="calendar__column-name">Sunday</div>
+					<div class="calendar__column-name">Monday</div>
+					<div class="calendar__column-name">Tuesday</div>
+					<div class="calendar__column-name">Wednesday</div>
+					<div class="calendar__column-name">Thursday</div>
+					<div class="calendar__column-name">Friday</div>
+					<div class="calendar__column-name">Saturday</div>
+				</div>				
+			</div>
+			<div class="calendar-days">
+
+			</div>
+		</div>
+		<div class="day-modal">
+			<div class="day-modal__background"></div>
+			<div class="day-modal__content-wrapper">
+				<div class="day-modal__date-side">
+					<p class="day-modal__date-day"></p>
+					<p class="day-modal__date-number"></p>
+				</div>
+				<div class="day-modal-inputs">
+					<p class="day-modal__save-status">All changes are saved.</p>
+					<div class="inline-inputs">
+						<input type="text" class="day-modal__input day-modal__title-input" maxlength="30" placeholder="Title">
+						<label>Holiday: <input type="checkbox" class="day-modal__input day-modal__holiday-input"></label>
+					</div>	
+					<textarea class="day-modal__input day-modal__note-input" maxlength="60" placeholder="Note"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<template class="calendar-day-template">
+		<div class="calendar-day">
+			<p class="calendar-day__number"></p>
+			<div class="calendar-day__title-wrapper">
+				<p class="calendar-day__title"></p>
+			</div>
+		</div>
+	</template>
+<script type="text/javascript" src="js/scripts.min.js"></script></body>
+</html>
