@@ -2,13 +2,13 @@
   "name": "beautiful_calendar",
   "version": "1.0.0",
   "description": "App for writing and keeping plans for current month",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "webpack-build": "webpack",
     "webpack-dev": "webpack-dev-server --mode development --open"
   },
   "author": "Zilfaron",
-  "license": "",
+  "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",

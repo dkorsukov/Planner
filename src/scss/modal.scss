@@ -8,7 +8,6 @@
 	position: fixed;
 	z-index: 1000;
 	transition: transform 0.4s linear;
-	perspective: convert(1200);
 
 	&__background {
 		width: 100%;
@@ -36,13 +35,21 @@
 		background-color: #fff;
 		z-index: 1001;
 		position: relative;
-		transition: all 0.4s linear;
-		transform: translateY( convert(-150) ) rotateX(-45deg);
+		transition: all 0.3s ease-in-out;
+		transform: translateY( convert(-100) );
 		opacity: 0;
 		box-shadow: convert(1) convert(1) convert(1) rgba(0, 0, 0, 0.25);
 
 		@media screen and ( max-width: convert(1200) ) {
 			min-height: convert(400);
+		}
+
+		@media screen and ( max-width: convert( $mobile ) ) {
+			min-width: convert(340);
+		}
+
+		@media screen and ( max-width: convert( $mobile ) ) {
+			flex-direction: column;
 		}
 	}
 
@@ -53,29 +60,45 @@
 	}
 
 	&__date-side {
-		width: 50%;
+		width: grid(7);
 		font-size: convert(40);
 		font-weight: bold;
 		text-align: center;
 		@include column(center, center);
+
+		@media screen and ( max-width: convert( $mobile ) ) {
+			width: grid(14);
+			padding: convert(20) 0;
+		}
 	}
 
 	&-inputs {
 		padding: convert(35);
 		width: grid(7);
 		@include column(center, space-between);
+
+		@media screen and ( max-width: convert( $mobile ) ) {
+			width: grid(14);
+			padding: convert(10) convert(20) convert(20) convert(20);
+		}
 	}
 
 	&__input {
+		max-width: 100%;
 		font-size: convert(22);
 		border: convert(1) solid rgba(222, 222, 222, 0.9);
 		border-radius: convert(5);
 		padding: convert(10) convert(10) convert(10) convert(15);
 	}
 
+	&__title-input {
+		margin-bottom: convert(12);
+	}
+
 	&__holiday-input {
-		width: convert(15);
-		height: convert(15);
+		width: convert(18);
+		height: convert(18);
+		vertical-align: middle;
 	}
 
 	&__note-input {
@@ -87,7 +110,7 @@
 	}
 
 	&_visible &__content-wrapper {
-		transform: translateY(0) rotateX(0);
+		transform: translateY(0);
 		opacity: 1;
 	}
 
@@ -104,6 +127,7 @@
 	width: 100%;
 	margin-top: convert(10);
 	@include row(space-between, center);
+	flex-wrap: wrap;
 }
 
 .save-status_hiding {

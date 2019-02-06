@@ -18,6 +18,14 @@ $dayHeight: convert(100);
 		min-width: convert(720);
 	}
 
+	@media screen and ( max-width: convert(730) ) {
+		min-width: convert(610);
+	}
+
+	@media screen and ( max-width: convert( $mobile ) ) {
+		min-width: convert(340);
+	}
+
 	&-header {
 		width: 100%;
 		border-top-left-radius: convert(6);
@@ -29,6 +37,10 @@ $dayHeight: convert(100);
 
 		&__date-wrapper {
 			padding: convert(25) convert(45);
+
+			@media screen and ( max-width: convert(730) ) {
+				padding: convert(14) convert(28);
+			}
 		}
 
 		&__current-month {
@@ -43,11 +55,25 @@ $dayHeight: convert(100);
 	&__columns-name {
 		width: grid(14);
 		@include row(center, center);
+
+		&.mobile {
+			display: none;
+
+			@media screen and ( max-width: convert(730) ) {
+				@include row(center, center);
+			}
+		}
+
+		&.desktop {
+			@media screen and ( max-width: convert(730) ) {
+				display: none;
+			}
+		}
 	}
 
 	&__column-name {
 		width: grid(2);
-		padding: convert(10) convert(15);
+		padding: convert(10) convert(12);
 		text-align: center;
 	}
 
@@ -67,13 +93,18 @@ $dayHeight: convert(100);
 		height: $dayHeight;
 		position: relative;
 		background-color: #F6F6F6;
-		border: convert(1) solid rgba(0, 0, 0, 0.15);
+		transition: transform 0.4s;
 		cursor: pointer;
 		@include column(center, center);
 		text-align: center;
+		box-shadow: inset 0 0 convert(1) rgba(0, 0, 0, 0.125);
 
 		&__number {
 			font-size: convert(28);
+
+			@media screen and ( max-width: convert( $mobile ) ) {
+				font-size: convert(22);
+			}
 		}
 
 		&__title-wrapper {
@@ -85,15 +116,36 @@ $dayHeight: convert(100);
 			left: 0;
 			transform: scale(0);
 			transition: transform 0.3s ease-out;
+
+			@media screen and ( max-width: convert( $mobile ) ) {
+				display: none;
+			}
+		}
+
+		&:hover {
+			transform: scaleX(0.95) scaleY(0.90);
 		}
 
 		&:hover &__title-wrapper {
 			transform: scale(1);
 		}
+
+		@media screen and ( max-width: convert( $mobile ) ) {
+			height: auto;
+			padding: convert(12) convert(14);
+		}
 	}
+}
+
+.current_day {
+	background-color: rgba(143, 186, 205, 0.65);
 }
 
 .empty-element {
 	width: $dayWidth;
 	height: $dayHeight;
+
+	@media screen and ( max-width: convert( $mobile ) ) {
+		height: auto;
+	}
 }

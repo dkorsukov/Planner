@@ -48,7 +48,7 @@ export default class Calendar {
 			this.storage = {};
 		}
 
-		if (!this.storage.lastMonth) {
+		if (this.storage.lastMonth === undefined) {
 			this.storage.lastMonth = new Date().getMonth();
 		}
 

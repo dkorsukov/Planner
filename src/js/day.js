@@ -35,5 +35,9 @@ export default class Day {
 		if ( this.holiday ) {
 			this.HTMLElement.classList.add("day_holiday");
 		}
+
+		if ( new Date().getDate() === this.dayNumber ) {
+			this.HTMLElement.classList.add("current_day");
+		}
 	}
 }

@@ -19,8 +19,6 @@ module.exports = {
 		overlay: true
 	},
 
-	devtool: "source-map",
-
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: "css/styles.min.css"
@@ -29,7 +27,7 @@ module.exports = {
 			template: "./src/index.html",
 			filename: "index.html",
 			minify: true,
-			favicon: "build/img/favicon.png"
+			favicon: "./build/favicon.png"
 		}),
 		new WebpackMd5Hash()
 	],
