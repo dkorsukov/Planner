@@ -26,8 +26,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: "./src/index.html",
 			filename: "index.html",
-			minify: true,
-			favicon: "./build/favicon.png"
+			minify: true
 		}),
 		new WebpackMd5Hash()
 	],
