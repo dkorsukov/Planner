@@ -24,6 +24,7 @@ window.addEventListener("load", () => {
 	let app = new Calendar({
 		calendarSelector: ".calendar",
 		headerSelector: ".calendar-header",
+		downloadSelector: ".calendar-header__download-btn",
 		daysContainerSelector: ".calendar-days",
 		dayHTMLTemplate: dayTemplate,
 		daySelector: ".calendar-day",

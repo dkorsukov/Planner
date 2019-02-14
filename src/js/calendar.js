@@ -7,7 +7,7 @@ import Day from "./day.js";
 "use strict";
 
 export default class Calendar {
-	constructor({ calendarSelector, headerSelector, daysContainerSelector, 
+	constructor({ calendarSelector, headerSelector, downloadSelector, daysContainerSelector, 
 								dayHTMLTemplate, daySelector, linkedModalSelector, storageName }) {
 		this.days = getDaysInMonth( new Date() );
 		this.month = getMonthString( new Date() );
@@ -27,6 +27,7 @@ export default class Calendar {
 		this.HTMLElement = document.querySelector(`${calendarSelector}`);
 		this.HTMLElement.header = this.HTMLElement.querySelector(`${headerSelector}`);
 		this.HTMLElement.daysContainer = this.HTMLElement.querySelector(`${daysContainerSelector}`);
+		this.HTMLElement.downloadBtn = this.HTMLElement.querySelector(`${downloadSelector}`);
 
 		document.querySelector(`${headerSelector}__current-month`).textContent = this.month;
 		document.querySelector(`${headerSelector}__current-year`).textContent = new Date().getFullYear();
@@ -36,6 +37,7 @@ export default class Calendar {
 
 		this.storageName = storageName;	// name of object in local storage for this app
 		this.storage = JSON.parse( localStorage.getItem(storageName) ); // object for writing to local storage
+		console.log(this.storage);
 	}
 
 	cloneToLocalStorage() { // clone calendar storage to local storage
@@ -142,7 +144,7 @@ export default class Calendar {
 	}
 
 	loadDays() {
-		console.time("Load time: ");
+		console.time("Load time");
 
 		for (let i = 1; i <= this.days; i++) {
 			let tempTitle = this.storage[i].title,
@@ -176,7 +178,37 @@ export default class Calendar {
 			this.HTMLElement.daysContainer.appendChild( day.HTMLElement );
 		}		
 
-		console.timeEnd("Load time: ");
+		console.timeEnd("Load time");
+	}
+
+	download() {
+		let downloadData = [];
+
+		for (let nb in this.storage) {
+			if ( isNaN(nb) ) continue;
+
+			if ( this.storage[nb].title.trim() || this.storage[nb].note.trim() ) {
+				let t = this.storage[nb].title,
+						n = this.storage[nb].note;
+
+				downloadData.push(`${nb} of ${this.month}, "${t}": \r\n ${n.split("\n").join("\r\n")} \r\n \r\n`);
+			}
+		}
+
+		if ( !downloadData.length ) {
+
+		}
+
+		let blob = new Blob(downloadData, { type: "text/plain" }),
+				url = URL.createObjectURL(blob);
+
+		let a = document.createElement("a");
+		a.download = "notes.txt";
+		a.href = url;
+
+		a.dispatchEvent( new MouseEvent("click") );
+
+		URL.revokeObjectURL(blob);
 	}
 
 	init() {
@@ -185,7 +217,7 @@ export default class Calendar {
 		let firstDayNumber = getFirstMonthDayNumber( new Date() );
 
 			// add empty elements for columns alignment															 
-		for (let i = 1; i <= firstDayNumber; i++) {
+		for (let i = 1; i <= firstDayNumber + 1; i++) {
 			let emptyElem = createDOMElement("div", {
 				class: "empty-element"
 			});
@@ -193,6 +225,18 @@ export default class Calendar {
 			this.HTMLElement.daysContainer.appendChild(emptyElem);
 		}	
 		
+		if ( !!(new Blob) ) {
+			this.HTMLElement.downloadBtn.addEventListener("mouseover", (evt) => {
+				evt.target.classList.remove("pulsation_anim");
+			});
+	
+			this.HTMLElement.downloadBtn.addEventListener("click", () => {
+				this.download();
+			});
+		} else {
+			this.HTMLElement.downloadBtn.parentNode.removeChild( this.HTMLElement.downloadBtn );
+		}
+
 		this.loadDays();
 	}
 }

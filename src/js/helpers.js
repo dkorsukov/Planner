@@ -15,7 +15,7 @@ export function createDOMElement(tag, attrs) {
 }
 
 export function getFirstMonthDayNumber(dateObj) {
-	return new Date( dateObj.getFullYear(), dateObj.getMonth(), 0 ).getDay() + 1;
+	return new Date( dateObj.getFullYear(), dateObj.getMonth(), 0 ).getDay();
 }
 
 export function getDaysInMonth(dateObj) {
