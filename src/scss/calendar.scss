@@ -60,10 +60,17 @@ $mobileHeight: convert(70);
 				top: convert(36);
 			}
 
-			padding: convert(15) convert(50);
+			padding: convert(15) convert(50) convert(15) convert(40);
 			border-radius: convert(25);
+			font-size: convert(14);
+			font-weight: 500;
+			transition: background-color 0.8s;
 			cursor: pointer;
 			transform: translateX(15%);
+
+			&:hover {
+				background-color: #98C3CD;
+			}
 		}
 	}
 
