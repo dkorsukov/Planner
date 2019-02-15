@@ -62,7 +62,6 @@ $mobileHeight: convert(70);
 
 			padding: convert(15) convert(50);
 			border-radius: convert(25);
-			transition: transform 0.5s;
 			cursor: pointer;
 			transform: translateX(15%);
 		}
@@ -155,11 +154,6 @@ $mobileHeight: convert(70);
 			padding: convert(12) convert(14);
 		}
 	}
-}
-
-.download_disabled {
-	animation: pulsation infinite 1.2s linear;
-	transform: translateX(85%);
 }
 
 @keyframes pulsation {

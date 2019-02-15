@@ -186,11 +186,12 @@ export default class Calendar {
 		for (let nb in this.storage) {
 			if ( isNaN(nb) ) continue;
 
-			if ( this.storage[nb].title.trim() || this.storage[nb].note.trim() ) {
+			if ( this.storage[nb].note.trim() ) {
 				let t = this.storage[nb].title,
 						n = this.storage[nb].note;
 
-				downloadData.push(`${this.month} ${nb}, "${t}": \r\n ${n.split("\n").join("\r\n")} \r\n \r\n`);
+				// control character "\r" moves the printing position to the start of the line
+				downloadData.push(`${this.month} ${nb}, "${t}": \r\n ${n.split("\n").join("\r\n ")} \r\n \r\n`);
 			}
 		}
 
@@ -207,7 +208,7 @@ export default class Calendar {
 
 		a.dispatchEvent( new MouseEvent("click") );
 
-		URL.revokeObjectURL(blob);
+		URL.revokeObjectURL(url);
 	}
 
 	init() {
@@ -226,21 +227,7 @@ export default class Calendar {
 		
 		if ( !!(new Blob) ) {
 			this.HTMLElement.downloadBtn.addEventListener("click", (evt) => {
-				evt.target.classList.remove("download_disabled");
-
-				setTimeout( () => {
-					window.addEventListener("click", (evt) => {
-						if ( !~evt.target.className.indexOf( this.HTMLElement.downloadBtn.classList[0] ) ) {
-							this.HTMLElement.downloadBtn.classList.add("download_disabled");
-						}
-					}, { once: true })
-				}, 100 );	
-			});
-	
-			this.HTMLElement.downloadBtn.addEventListener("click", (evt) => {
-				if ( !~evt.target.className.indexOf("download_disabled") ) {
 					this.download();
-				}	else return null;
 			});
 		} else {
 			this.HTMLElement.downloadBtn.parentNode.removeChild( this.HTMLElement.downloadBtn );
