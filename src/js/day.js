@@ -11,6 +11,11 @@ export default class Day {
 																			this.dayNumber) );
 
 		this.HTMLElement = HTMLTemplate.cloneNode(true).content.querySelector(".calendar-day");
+
+		if ( !HTMLTemplate.content ) {
+			this.HTMLElement = HTMLTemplate.cloneNode(true).querySelector(".calendar-day");
+		}
+
 		this.HTMLElement.dateDay = this.HTMLElement.querySelector(".calendar-day__day");
 		this.HTMLElement.dateNumber = this.HTMLElement.querySelector(".calendar-day__number");
 		this.HTMLElement.titleElement = this.HTMLElement.querySelector(".calendar-day__title");

@@ -6,6 +6,8 @@
 	visibility: hidden;
 	@include row(center, center);
 	position: fixed;
+	top: 0;
+	left: 0;
 	z-index: 1000;
 	transition: transform 0.4s linear;
 
@@ -27,7 +29,7 @@
 	&__content-wrapper {
 		width: grid(7);
 		min-width: convert(500);
-		min-height: convert(600);
+		height: convert(600);
 		border-radius: convert(8);
 		position: relative;
 		overflow: hidden;

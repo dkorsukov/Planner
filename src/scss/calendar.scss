@@ -2,6 +2,7 @@
 
 $dayWidth: grid(2);
 $dayHeight: convert(100);
+$mobileHeight: convert(70);
 
 .calendar {
 	position: relative;
@@ -61,13 +62,9 @@ $dayHeight: convert(100);
 
 			padding: convert(15) convert(50);
 			border-radius: convert(25);
-			transform: translateX(85%);
 			transition: transform 0.5s;
 			cursor: pointer;
-
-			&:hover {
-				transform: translateX(15%);
-			}
+			transform: translateX(15%);
 		}
 	}
 
@@ -118,6 +115,10 @@ $dayHeight: convert(100);
 		text-align: center;
 		box-shadow: inset 0 0 convert(1) rgba(0, 0, 0, 0.125);
 
+		@media screen and ( max-height: convert(660) ) {
+			height: $mobileHeight;
+		}
+
 		&__number {
 			font-size: convert(28);
 
@@ -156,8 +157,9 @@ $dayHeight: convert(100);
 	}
 }
 
-.pulsation_anim {
+.download_disabled {
 	animation: pulsation infinite 1.2s linear;
+	transform: translateX(85%);
 }
 
 @keyframes pulsation {
@@ -182,5 +184,9 @@ $dayHeight: convert(100);
 
 	@media screen and ( max-width: convert( $mobile ) ) {
 		height: auto;
+	}
+
+	@media screen and ( max-height: convert(660) ) {
+		height: $mobileHeight;
 	}
 }

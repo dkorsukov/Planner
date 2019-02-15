@@ -37,7 +37,6 @@ export default class Calendar {
 
 		this.storageName = storageName;	// name of object in local storage for this app
 		this.storage = JSON.parse( localStorage.getItem(storageName) ); // object for writing to local storage
-		console.log(this.storage);
 	}
 
 	cloneToLocalStorage() { // clone calendar storage to local storage
@@ -191,12 +190,12 @@ export default class Calendar {
 				let t = this.storage[nb].title,
 						n = this.storage[nb].note;
 
-				downloadData.push(`${nb} of ${this.month}, "${t}": \r\n ${n.split("\n").join("\r\n")} \r\n \r\n`);
+				downloadData.push(`${this.month} ${nb}, "${t}": \r\n ${n.split("\n").join("\r\n")} \r\n \r\n`);
 			}
 		}
 
 		if ( !downloadData.length ) {
-
+			return null;
 		}
 
 		let blob = new Blob(downloadData, { type: "text/plain" }),
@@ -226,12 +225,22 @@ export default class Calendar {
 		}	
 		
 		if ( !!(new Blob) ) {
-			this.HTMLElement.downloadBtn.addEventListener("mouseover", (evt) => {
-				evt.target.classList.remove("pulsation_anim");
+			this.HTMLElement.downloadBtn.addEventListener("click", (evt) => {
+				evt.target.classList.remove("download_disabled");
+
+				setTimeout( () => {
+					window.addEventListener("click", (evt) => {
+						if ( !~evt.target.className.indexOf( this.HTMLElement.downloadBtn.classList[0] ) ) {
+							this.HTMLElement.downloadBtn.classList.add("download_disabled");
+						}
+					}, { once: true })
+				}, 100 );	
 			});
 	
-			this.HTMLElement.downloadBtn.addEventListener("click", () => {
-				this.download();
+			this.HTMLElement.downloadBtn.addEventListener("click", (evt) => {
+				if ( !~evt.target.className.indexOf("download_disabled") ) {
+					this.download();
+				}	else return null;
 			});
 		} else {
 			this.HTMLElement.downloadBtn.parentNode.removeChild( this.HTMLElement.downloadBtn );
