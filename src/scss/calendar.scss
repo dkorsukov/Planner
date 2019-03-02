@@ -2,7 +2,8 @@
 
 $dayWidth: grid(2);
 $dayHeight: convert(100);
-$mobileHeight: convert(70);
+$mobileHeight: convert(75);
+$smallMobileHeight: convert(55);
 
 .calendar {
 	position: relative;
@@ -25,7 +26,11 @@ $mobileHeight: convert(70);
 	}
 
 	@media screen and ( max-width: convert( $mobile ) ) {
-		min-width: convert(340);
+		min-width: convert(460);
+	}
+
+	@media screen and ( max-width: convert(480) ) {
+		min-width: convert(325);
 	}
 
 	&-header {
@@ -53,24 +58,62 @@ $mobileHeight: convert(70);
 			font-size: convert(18);
 		}
 
-		&__download-btn {
+		&__menu {
 			&-wrapper {
 				position: absolute;
-				right: 0;
-				top: convert(36);
+				right: convert(15);
+				top: convert(15);
 			}
 
-			padding: convert(15) convert(50) convert(15) convert(40);
-			border-radius: convert(25);
-			font-size: convert(14);
-			font-weight: 500;
-			transition: background-color 0.8s;
+			&-open {
+				padding: convert(5) convert(10);
+				cursor: pointer;
+
+				& > .dot {
+					display: block;
+					width: convert(5);
+					height: convert(5);
+					background-color: #F0F0F0;
+					border-radius: 50%;
+					margin: convert(3) 0;
+				}	
+			}
+
+			&-items {
+				background-color: #f0f0f0;
+				overflow: hidden;
+				width: convert(150);
+				right: convert(0);
+				border-radius: convert(4);
+				position: absolute;
+				z-index: 100;
+				visibility: hidden;
+
+				&.menu_visible {
+					visibility: visible;
+				}
+			}
+		}
+
+		&__download-btn, &__clear-btn {
+			padding: convert(5) 0;
+			background-color: transparent;
+			width: 100%;
+			text-align: center;
+			font-size: convert(16);
 			cursor: pointer;
-			transform: translateX(15%);
 
 			&:hover {
-				background-color: #98C3CD;
+				background-color: #DEDEDE;
 			}
+		}
+
+		&__menu-open {
+			transition: transform 0.6s;
+
+			&.opened {
+				transform: rotate(90deg);
+			}	
 		}
 	}
 
@@ -105,7 +148,7 @@ $mobileHeight: convert(70);
 		height: 100%;
 		background-color: #fff;
 		overflow: hidden;
-		border: convert(1) solid rgba(0, 0, 0, 0.5);
+		border: convert(1) solid rgba(0, 0, 0, 0.15);
 		border-bottom-left-radius: convert(6);
 		border-bottom-right-radius: convert(6);
 	}
@@ -121,8 +164,12 @@ $mobileHeight: convert(70);
 		text-align: center;
 		box-shadow: inset 0 0 convert(1) rgba(0, 0, 0, 0.125);
 
-		@media screen and ( max-height: convert(660) ) {
+		@media screen and ( max-height: convert(780) ) {
 			height: $mobileHeight;
+		}
+
+		@media screen and ( max-height: convert(600) ) {
+			height: $smallMobileHeight;
 		}
 
 		&__number {
@@ -157,21 +204,8 @@ $mobileHeight: convert(70);
 		}
 
 		@media screen and ( max-width: convert( $mobile ) ) {
-			height: auto;
 			padding: convert(12) convert(14);
 		}
-	}
-}
-
-@keyframes pulsation {
-	30% {
-		box-shadow: 0 0 convert(12) rgba(255, 255, 255, 0.85);
-	}
-	60% {
-		box-shadow: 0 0 convert(36) rgba(255, 255, 255, 0.55);
-	}
-	100% {
-		box-shadow: 0 0 convert(78) rgba(255, 255, 255, 0.10);
 	}
 }
 
@@ -183,11 +217,11 @@ $mobileHeight: convert(70);
 	width: $dayWidth;
 	height: $dayHeight;
 
-	@media screen and ( max-width: convert( $mobile ) ) {
-		height: auto;
+	@media screen and ( min-height: convert(601) ) {
+		height: $mobileHeight;
 	}
 
-	@media screen and ( max-height: convert(660) ) {
-		height: $mobileHeight;
+	@media screen and ( max-height: convert(600) ) {
+		height: $smallMobileHeight;
 	}
 }

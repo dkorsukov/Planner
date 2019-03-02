@@ -7,7 +7,7 @@ import Day from "./day.js";
 "use strict";
 
 export default class Calendar {
-	constructor({ calendarSelector, headerSelector, downloadSelector, daysContainerSelector, 
+	constructor({ calendarSelector, headerSelector, clearSelector, downloadSelector, daysContainerSelector, 
 								dayHTMLTemplate, daySelector, linkedModalSelector, storageName }) {
 		this.days = getDaysInMonth( new Date() );
 		this.month = getMonthString( new Date() );
@@ -21,6 +21,7 @@ export default class Calendar {
 			statusElemSelector: ".day-modal__save-status",
 			animCls: "save-status_hiding",
 			backgroundSelector: ".day-modal__background",
+			closeBtnSelector: ".day-modal__close-btn",
 			visibleCls: "day-modal_visible"
 		});
 
@@ -28,6 +29,7 @@ export default class Calendar {
 		this.HTMLElement.header = this.HTMLElement.querySelector(`${headerSelector}`);
 		this.HTMLElement.daysContainer = this.HTMLElement.querySelector(`${daysContainerSelector}`);
 		this.HTMLElement.downloadBtn = this.HTMLElement.querySelector(`${downloadSelector}`);
+		this.HTMLElement.clearBtn = this.HTMLElement.querySelector(`${clearSelector}`);
 
 		document.querySelector(`${headerSelector}__current-month`).textContent = this.month;
 		document.querySelector(`${headerSelector}__current-year`).textContent = new Date().getFullYear();
@@ -72,15 +74,18 @@ export default class Calendar {
 		this.cloneToLocalStorage();
 	}
 
-	initModal({ statusElemSelector, animCls, backgroundSelector, visibleCls }) {
+	initModal({ statusElemSelector, animCls, backgroundSelector, closeBtnSelector, visibleCls }) {
 		let statusElem = document.querySelector(statusElemSelector);
 
-		document.querySelector(backgroundSelector).addEventListener("click", (evt) => {
+		let closeModal = () => {
 			this.modalWindow.classList.remove( this.modalWindow.visibleCls );
 
 			this.clearDays();
-			this.loadDays();
-		});
+			this.loadDays();			
+		};
+
+		document.querySelector(backgroundSelector).addEventListener("click", closeModal);
+		document.querySelector(closeBtnSelector).addEventListener("click", closeModal);
 
 		this.modalWindow.visibleCls = visibleCls;
 
@@ -211,6 +216,14 @@ export default class Calendar {
 		URL.revokeObjectURL(url);
 	}
 
+	clearApp() {
+		this.storage = {};
+		this.initAppStorage();
+
+		this.clearDays();
+		this.loadDays();
+	}
+
 	init() {
 		this.initAppStorage();
 
@@ -227,11 +240,15 @@ export default class Calendar {
 		
 		if ( !!(new Blob) ) {
 			this.HTMLElement.downloadBtn.addEventListener("click", (evt) => {
-					this.download();
+				this.download();
 			});
 		} else {
 			this.HTMLElement.downloadBtn.parentNode.removeChild( this.HTMLElement.downloadBtn );
 		}
+
+		this.HTMLElement.clearBtn.addEventListener("click", (evt) => {
+			this.clearApp();
+		});
 
 		this.loadDays();
 	}

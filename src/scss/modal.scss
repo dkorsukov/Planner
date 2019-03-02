@@ -1,5 +1,7 @@
 @import "_settings.scss";
 
+$columnOrientation: convert(1030);
+
 .day-modal {
 	width: grid(14);
 	height: 100%;
@@ -50,8 +52,12 @@
 			min-width: convert(340);
 		}
 
-		@media screen and ( max-width: convert( $mobile ) ) {
+		@media screen and ( max-width: $columnOrientation ) {
 			flex-direction: column;
+		}
+
+		@media screen and ( max-height: convert(650) ) {
+			height: convert(350);
 		}
 	}
 
@@ -63,23 +69,51 @@
 
 	&__date-side {
 		width: grid(7);
+		position: relative;
 		font-size: convert(40);
 		font-weight: bold;
 		text-align: center;
 		@include column(center, center);
 
-		@media screen and ( max-width: convert( $mobile ) ) {
+		@media screen and ( max-width: $columnOrientation ) {
 			width: grid(14);
 			padding: convert(20) 0;
+		}
+	}
+
+	&__close-btn {
+		padding: convert(10);
+		position: absolute;
+		display: inline-block;
+		top: convert(10);
+		left: convert(15);
+		cursor: pointer;
+
+		&::before, &::after {
+			content: "";
+			position: absolute;
+			display: block;
+			width: convert(3);
+			height: convert(20);
+			background-color: #fff;
+		}
+
+		&::before {
+			transform: rotate(-45deg);
+		}
+
+		&::after {
+			transform: rotate(45deg);
 		}
 	}
 
 	&-inputs {
 		padding: convert(35);
 		width: grid(7);
+		height: 100%;
 		@include column(center, space-between);
 
-		@media screen and ( max-width: convert( $mobile ) ) {
+		@media screen and ( max-width: $columnOrientation ) {
 			width: grid(14);
 			padding: convert(10) convert(20) convert(20) convert(20);
 		}

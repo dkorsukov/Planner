@@ -1,7 +1,7 @@
 @import "_settings.scss";
 
 html, body {
-	min-width: convert(360);
+	min-width: convert(340);
 	font: 100% "Open Sans", sans-serif;
 }
 
@@ -14,6 +14,8 @@ html, body {
 	
 	&-bg {
 		width: grid(14);
+		background-size: 100% 120%;
+		background-repeat: no-repeat;
 		position: fixed;
 		top: 0;
 		left: 0;

@@ -42,7 +42,7 @@ let springTheme = { // theme for Mart, April and May
 		bgColor: "#36D929"
 	},
 	canvasStyles: {
-		bg: null,
+		bg: "linear-gradient( -45deg, rgba(54, 217, 74, 0.65), rgba(54, 217, 65, 0.65) ) #CACACA",
 		objectsColor: null
 	},
 	animation: null,
@@ -60,7 +60,9 @@ let setTheme = (elems, theme) => { // set theme from theme-object
 	let metaTag = document.head.querySelector("meta[name='theme-color']");
 	metaTag.setAttribute("content", theme.metaThemeColor);
 
-	theme.animation.call(null, canvas, theme.canvasStyles.objectsColor); // start animation on canvas
+	if ( theme.animation ) {
+		theme.animation.call(null, canvas, theme.canvasStyles.objectsColor); // start animation on canvas
+	}	
 }
 
 let setThemeBySeason = (elemsForSet) => {
@@ -71,7 +73,7 @@ let setThemeBySeason = (elemsForSet) => {
 			setTheme(elemsForSet, winterTheme);
 		break;
 		case (cm === 2 || cm === 3 || cm === 4):
-			/* FOR SPRING THEME */
+		setTheme(elemsForSet, springTheme);
 		break;
 		case (cm === 5 || cm === 6 || cm === 7):
 			/* FOR SUMMER THEME */
@@ -80,8 +82,7 @@ let setThemeBySeason = (elemsForSet) => {
 			/* FOR AUTUMN THEME */
 		break;	
 		default: 
-			throw new Error("Unexpected Error");
-		break;		  
+			throw new Error("Unexpected Error");	  
 	}
 }
 

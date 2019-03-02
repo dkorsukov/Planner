@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="Calendar with notes on every day">
 	<meta name="title" content="Calendar with month planner">
@@ -18,27 +18,39 @@
 					<p class="calendar-header__current-month">Month</p>
 					<p class="calendar-header__current-year">Year</p>
 				</div>
-				<div class="calendar-header__download-btn-wrapper" title="Download your notes for this month">
-					<button class="calendar-header__download-btn download_disabled">Download Notes</button>
-				</div>
-				<div class="calendar__columns-name desktop">
-					<span class="calendar__column-name">Sunday</span>
-					<span class="calendar__column-name">Monday</span>
-					<span class="calendar__column-name">Tuesday</span>
-					<span class="calendar__column-name">Wednesday</span>
-					<span class="calendar__column-name">Thursday</span>
-					<span class="calendar__column-name">Friday</span>
-					<span class="calendar__column-name">Saturday</span>
-				</div>				
-				<div class="calendar__columns-name mobile">
-					<span class="calendar__column-name">Su</span>
-					<span class="calendar__column-name">Mo</span>
-					<span class="calendar__column-name">Tu</span>
-					<span class="calendar__column-name">We</span>
-					<span class="calendar__column-name">Th</span>
-					<span class="calendar__column-name">Fr</span>
-					<span class="calendar__column-name">Sa</span>
-				</div>
+				<div class="calendar-header__menu-wrapper">
+					<div class="calendar-header__menu-open">
+						<span class="dot"></span>
+						<span class="dot"></span>
+						<span class="dot"></span>
+					</div>	
+					<ul class="calendar-header__menu-items">
+						<li class="calendar-header__download-btn-wrapper">
+							<button class="calendar-header__download-btn">Download Notes</button>
+						</li>
+						<li class="calendar-header__clear-btn-wrapper">
+							<button class="calendar-header__clear-btn">Clear Notes</button>
+						</li>
+					</ul>
+				</div>	
+				<ul class="calendar__columns-name desktop">
+					<li class="calendar__column-name">Sunday</li>
+					<li class="calendar__column-name">Monday</li>
+					<li class="calendar__column-name">Tuesday</li>
+					<li class="calendar__column-name">Wednesday</li>
+					<li class="calendar__column-name">Thursday</li>
+					<li class="calendar__column-name">Friday</li>
+					<li class="calendar__column-name">Saturday</li>
+				</ul>				
+				<ul class="calendar__columns-name mobile">
+					<li class="calendar__column-name">Su</li>
+					<li class="calendar__column-name">Mo</li>
+					<li class="calendar__column-name">Tu</li>
+					<li class="calendar__column-name">We</li>
+					<li class="calendar__column-name">Th</li>
+					<li class="calendar__column-name">Fr</li>
+					<li class="calendar__column-name">Sa</li>
+				</ul>
 			</div>
 			<div class="calendar-days">
 
@@ -48,6 +60,7 @@
 			<div class="day-modal__background"></div>
 			<div class="day-modal__content-wrapper">
 				<div class="day-modal__date-side">
+					<div class="day-modal__close-btn"></div>
 					<p class="day-modal__date-day"></p>
 					<p class="day-modal__date-number"></p>
 				</div>
