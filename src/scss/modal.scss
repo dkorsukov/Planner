@@ -6,6 +6,7 @@ $columnOrientation: convert(1030);
 	width: grid(14);
 	height: 100%;
 	visibility: hidden;
+	position: relative;
 	@include row(center, center);
 	position: fixed;
 	top: 0;
@@ -45,7 +46,7 @@ $columnOrientation: convert(1030);
 		box-shadow: convert(1) convert(1) convert(1) rgba(0, 0, 0, 0.25);
 
 		@media screen and ( max-width: convert(1200) ) {
-			min-height: convert(400);
+			height: convert(400);
 		}
 
 		@media screen and ( max-width: convert( $mobile ) ) {
@@ -58,6 +59,11 @@ $columnOrientation: convert(1030);
 
 		@media screen and ( max-height: convert(650) ) {
 			height: convert(350);
+		}
+
+		@media screen and ( max-height: convert(350) ) {
+			height: convert(250);
+			overflow: auto;
 		}
 	}
 
@@ -78,6 +84,10 @@ $columnOrientation: convert(1030);
 		@media screen and ( max-width: $columnOrientation ) {
 			width: grid(14);
 			padding: convert(20) 0;
+		}
+
+		@media screen and ( max-height: convert(350) ) {
+			display: none;
 		}
 	}
 
@@ -116,6 +126,10 @@ $columnOrientation: convert(1030);
 		@media screen and ( max-width: $columnOrientation ) {
 			width: grid(14);
 			padding: convert(10) convert(20) convert(20) convert(20);
+		}
+
+		@media screen and ( max-height: convert(350) ) {
+			background-color: #f0f0f0;
 		}
 	}
 
