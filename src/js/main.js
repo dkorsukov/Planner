@@ -24,6 +24,8 @@ window.addEventListener("load", () => {
 		menu.classList.toggle("menu_visible");
 	});		
 
+	screen.orientation.lock("portrait-primary");
+
 	setThemeBySeason([ document.querySelector(".calendar-header"),
 										 document.querySelector(".day-modal__date-side") ]);
 
