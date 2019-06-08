@@ -49,7 +49,31 @@ let springTheme = { // theme for Mart, April and May
 	metaThemeColor: "#27CA1A" // value for "theme-color" meta tag
 };
 
-// settings for themes of other seasons will be added later...
+let summerTheme = { // theme for June, July and August
+	elemsStyles: {
+		fontColor: "#FFFFFF",
+		bgColor: "#F0D059"
+	},
+	canvasStyles: {
+		bg: "linear-gradient( -45deg, rgba(240, 225, 101, 0.75), rgba(240, 211, 107, 0.70) ) #CACACA",
+		objectsColor: null
+	},
+	animation: null,
+	metaThemeColor: "#F0C33A" // value for "theme-color" meta tag
+};
+
+let autumnTheme = { // theme for September, October and November
+	elemsStyles: {
+		fontColor: "#FFFFFF",
+		bgColor: "#E7A353"
+	},
+	canvasStyles: {
+		bg: "linear-gradient( -45deg, rgba(225, 190, 76, 0.75), rgba(243, 212, 98, 0.70) ) #CACACA",
+		objectsColor: null
+	},
+	animation: null,
+	metaThemeColor: "#E7A353" // value for "theme-color" meta tag
+};
 
 let setTheme = (elems, theme) => { // set theme from theme-object
 	canvas.style.background = theme.canvasStyles.bg;
@@ -73,13 +97,13 @@ let setThemeBySeason = (elemsForSet) => {
 			setTheme(elemsForSet, winterTheme);
 		break;
 		case (cm === 2 || cm === 3 || cm === 4):
-		setTheme(elemsForSet, springTheme);
+			setTheme(elemsForSet, springTheme);
 		break;
 		case (cm === 5 || cm === 6 || cm === 7):
-			/* FOR SUMMER THEME */
+			setTheme(elemsForSet, summerTheme);
 		break;
 		case (cm === 8 || cm === 9 || cm === 10):
-			/* FOR AUTUMN THEME */
+			setTheme(elemsForSet, autumnTheme);
 		break;	
 		default: 
 			throw new Error("Unexpected Error");	  
